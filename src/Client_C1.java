@@ -10,8 +10,8 @@ public class Client_C1 {
         DatagramPacket returnPacket = new DatagramPacket(buf, buf.length);
         socket.send(packet);
         socket.receive(returnPacket);
-        String retrunMsg = new String(returnPacket.getData());
-        System.out.println(retrunMsg);
+        String returnMsg = new String(returnPacket.getData());
+        System.out.println(returnMsg);
 
         socket.close();
     }
