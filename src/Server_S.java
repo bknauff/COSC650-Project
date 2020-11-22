@@ -4,12 +4,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server_S implements Runnable {
-    /*
-    public Server_S() throws SocketException {
-        udpSocket = new DatagramSocket(12331);
-    }
-     */
-
     public void run() {
         ExecutorService pool = Executors.newFixedThreadPool(2);
         DatagramSocket udpSocket = null;
@@ -25,19 +19,6 @@ public class Server_S implements Runnable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                /*
-                udpSocket.receive(packet);
-                String input = new String(packet.getData());
-                if (input.contains("CLIENT C1")) {
-                    System.out.println(input);
-                    String msg = "TIME ACK";
-                    DatagramPacket packetReturn = new DatagramPacket(msg.getBytes(), msg.getBytes().length, packet.getAddress(), 80);
-                    udpSocket.send(packetReturn);
-                } else {
-                    System.out.println(input);
-                }
-
-                 */
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,16 +32,4 @@ public class Server_S implements Runnable {
         Server_S server = new Server_S();
         server.run();
     }
-    /*
-    public static void main(String[] args) throws Exception {
-        DatagramSocket udpSocket = new DatagramSocket(12331);
-        byte[] buf = new byte[2048];
-        DatagramPacket packet = new DatagramPacket(buf, buf.length);
-        udpSocket.receive(packet);
-        String input = new String(packet.getData()).trim();
-        System.out.println(input);
-
-        udpSocket.close();
-    }
-     */
 }
