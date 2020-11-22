@@ -6,27 +6,26 @@ public class ClientHandler implements Runnable{
     DatagramPacket packet;
     byte[] buf;
 
-    public ClientHandler(DatagramSocket clientSocket){
-        this.client = clientSocket;
+    public ClientHandler(DatagramSocket socket, DatagramPacket packet){
+        this.client =socket;
+        this.packet = packet;
         buf = new byte[2048];
-        packet = new DatagramPacket(buf, buf.length);
     }
 
     public void run() {
         try{
-            client.receive(packet);
             String input = new String(packet.getData());
-            if(input.contains("CLIENT C1")){
+            if (input.contains("CLIENT C1")) {
                 System.out.println(input);
-            }
-            else {
+                String msg = "TIME ACK";
+                DatagramPacket packetReturn = new DatagramPacket(msg.getBytes(), msg.getBytes().length, packet.getAddress(), 80);
+                client.send(packetReturn);
+            } else {
                 System.out.println(input);
             }
 
         }catch(Exception e){
             e.printStackTrace();
-        }finally {
-            client.close();
         }
     }
 }
