@@ -7,32 +7,29 @@ public class Client_C {
         PrintWriter fromS = new PrintWriter(socket.getOutputStream(), true);
         fromS.println("GET / HTTP/1.1");
         fromS.println("Host: example.com");
-        fromS.println("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0");
-        fromS.println("Accept: text/html");
-        fromS.println("Accept-Language: en-US");
         fromS.println("");
         socket.shutdownOutput();
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         String line;
         StringBuilder data = new StringBuilder();
-        DatagramSocket udpSocket = new DatagramSocket();
-        byte[] buf = new byte[1024];
-        InetAddress address = InetAddress.getByName("127.0.0.1");
-        DatagramPacket packet;
 
-
-        while((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null) {
             data.append("\n").append(line);
         }
-        System.out.println(data);
-        buf = data.toString().getBytes();
-        packet = new DatagramPacket(buf, buf.length, address, 12331);
-        udpSocket.send(packet);
         socket.shutdownInput();
-        System.out.println("DATA SENT");
+        System.out.println(data);
+
+        byte[] buf = new byte[2048];
+        DatagramSocket udpSocket = new DatagramSocket();
+        InetAddress address = InetAddress.getByName("127.0.0.1");
+        buf = data.toString().getBytes();
+        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 12331);
+        udpSocket.send(packet);
+        System.out.println("\nDATA SENT");
 
         socket.close();
+        udpSocket.close();
         fromS.close();
         reader.close();
     }
