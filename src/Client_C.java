@@ -22,7 +22,7 @@ public class Client_C {
 
         byte[] buf = new byte[2048];
         DatagramSocket udpSocket = new DatagramSocket();
-        InetAddress address = InetAddress.getByName("127.0.0.1");
+        InetAddress address = InetAddress.getByName("localhost");
         buf = data.toString().getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 12331);
         udpSocket.send(packet);
