@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class Client_C {
+public class KnauffClientC {
     public static void main(String[] args) throws Exception {
         Socket socket = new Socket("www.example.com", 80);
         PrintWriter fromS = new PrintWriter(socket.getOutputStream(), true);

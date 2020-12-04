@@ -3,7 +3,7 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server_S implements Runnable {
+public class KnauffServerS implements Runnable {
     public void run() {
         ExecutorService pool = Executors.newFixedThreadPool(2);
         DatagramSocket udpSocket = null;
@@ -15,7 +15,7 @@ public class Server_S implements Runnable {
 
                 try {
                     udpSocket.receive(packet);
-                    pool.execute(new ClientHandler(udpSocket, packet));
+                    pool.execute(new KnauffClientHandler(udpSocket, packet));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -29,7 +29,7 @@ public class Server_S implements Runnable {
     }
 
     public static void main(String[] args) throws IOException {
-        Server_S server = new Server_S();
+        KnauffServerS server = new KnauffServerS();
         server.run();
     }
 }

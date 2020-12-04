@@ -1,11 +1,11 @@
 import java.net.*;
 
-public class ClientHandler implements Runnable {
+public class KnauffClientHandler implements Runnable {
     DatagramSocket client;
     DatagramPacket packet;
     byte[] buf;
 
-    public ClientHandler(DatagramSocket socket, DatagramPacket packet) {
+    public KnauffClientHandler(DatagramSocket socket, DatagramPacket packet) {
         this.client = socket;
         this.packet = packet;
         buf = new byte[2048];

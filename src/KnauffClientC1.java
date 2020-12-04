@@ -1,6 +1,6 @@
 import java.net.*;
 
-public class Client_C1 {
+public class KnauffClientC1 {
     public static void main(String[] args) throws Exception {
         byte[] buf = new byte[2048];
         DatagramSocket socket = new DatagramSocket(80);
